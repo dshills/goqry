@@ -2,6 +2,29 @@
 
 SQL Query Builder for Go
 
+## Install
+
+## Example
+
+#### Code
+```go
+	users := NewTable("users").Select("first_name", "last_name")
+	assets := NewTable("user_assets").Select("name")
+	users.InnerJoin(assets).Field("user_id").EqField(assets.Field("user_id"))
+	fmt.Println(users.Indent("\n", ""))
+```
+
+#### Output
+```sh
+SELECT
+users.first_name,
+users.last_name,
+user_assets.name
+FROM `users`
+INNER JOIN `user_assets`
+ON users.user_id = user_assets.user_id
+```
+
 --
     import "."
 
